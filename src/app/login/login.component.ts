@@ -12,9 +12,6 @@ import { User } from '../model/user.model';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  public connecte : boolean = false ;
-
   messageError:any
 
   registerForm =  new FormGroup({
@@ -86,7 +83,3 @@ export class LoginComponent implements OnInit {
      
       },(err:HttpErrorResponse)=>this.messageError=err.error.error);
       
-  }
-
-  
-}
