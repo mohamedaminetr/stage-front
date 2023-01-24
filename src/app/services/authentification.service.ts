@@ -9,8 +9,9 @@ import { environment } from '../environments/environment';
 })
 export class AuthentificationService {
   constructor(private http : HttpClient , public router: Router) { }
-  getAllusers(){
-    return this.http.get(environment.urlBackend + 'admin/')
-  }
 
+login(data:any): Observable<any> 
+{
+  return this.http.post(environment.urlBackend + 'sessions/', data);
+}
 }
