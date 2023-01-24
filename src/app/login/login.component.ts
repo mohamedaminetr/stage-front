@@ -1,17 +1,19 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthentificationService } from '../services/authentification.service';
-import { FormControl, FormGroup, Validators, } from '@angular/forms';
-import { OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { User } from '../model/user.model';
+import { AuthentificationService } from '../services/authentification.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-index',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+export class LoginComponent implements OnInit {
+  public connecte : boolean = false ;
+
   messageError:any
 
   registerForm =  new FormGroup({
@@ -39,7 +41,7 @@ import { User } from '../model/user.model';
 
 
     };
-    
+    debugger
     this.Auth.login(data).subscribe(
       response => {
         console.log(response);
@@ -54,13 +56,16 @@ import { User } from '../model/user.model';
 
 
        if(response.user.email_confirmed==true) {
-        if(response.user.role =="admin"  ){ 
+        if(response.logged_in ==true && response.user.role =="admin"  ){ 
           sessionStorage.setItem( 'admindata', JSON.stringify( response.user ) );
+          sessionStorage.setItem( 'logged_in', JSON.stringify( response.logged_in ) );
+          console.log(response);
           this.route.navigate(['/dashboard-admin']);
         }
-        else if(response.user.role =="employee")
+        else if(response.logged_in ==true && response.user.role =="employee")
         {
           sessionStorage.setItem( 'employeedata', JSON.stringify( response.user ) );
+          sessionStorage.setItem( 'logged_in', JSON.stringify( response.logged_in ) );
           this.route.navigate(['/dashboard-employee']);
         }
         else{
@@ -83,3 +88,7 @@ import { User } from '../model/user.model';
      
       },(err:HttpErrorResponse)=>this.messageError=err.error.error);
       
+  }
+
+  
+}
