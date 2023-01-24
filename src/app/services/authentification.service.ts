@@ -10,13 +10,4 @@ import { environment } from '../environments/environment';
 export class AuthentificationService
  {
   constructor(private http : HttpClient , public router: Router) { }
-  getAllusers()
-  {
-    return this.http.get(environment.urlBackend + 'users/')
-  }
-
-
-
-
-
 }

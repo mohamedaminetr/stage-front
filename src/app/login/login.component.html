@@ -10,7 +10,7 @@
   
   <section class="form-section">
     <div class="form-wrapper">
-      <form >
+      <form [formGroup]="registerForm">
         <div class="photo-info">
           <img src="https://png.pngtree.com/png-clipart/20191121/original/pngtree-user-login-or-authenticate-icon-on-gray-background-flat-icon-ve-png-image_5089976.jpg" alt="">
           <h3>Welcome to Com&Dev </h3>
@@ -19,7 +19,7 @@
           <input 
           type="text"
             id="login-email"
-            name="email"  formControlName="email" id="txt" aria-describedby="helpId" placeholder="UserName"
+            name="email"  formControlName="email" [(ngModel)]="user.email" id="txt" aria-describedby="helpId" placeholder="UserName"
           />
         </div>
         <div class="input-block password">
@@ -28,13 +28,13 @@
             id="login-email"
         
             placeholder="Password"  formControlName="password" 
-          ngModel required
+            [(ngModel)]="user.password" ngModel required
           />
         </div>
         <p>Contact Webmaster ? <a routerLink="/contact" class="span">go  here.</a></p>
 
         <p>forgot your  account? <a routerLink="/forgot-password" class="span">go  here.</a></p>
-        <button type="button" (click)="getalluser()"   class="btn-login">Sign In</button>
+        <button type="button" (click)="login()" class="btn-login">Sign In</button>
       </form>
     </div>
   </section>
