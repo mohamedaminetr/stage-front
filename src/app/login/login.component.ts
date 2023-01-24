@@ -16,11 +16,18 @@ export class LoginComponent {
 
   getalluser(){
     this.usersService.getAllusers().subscribe(data=>{
+      this.dataArray = data
       console.log(this.dataArray)
       this.counter = this.dataArray.length , (err:HttpErrorResponse)=>{
       this.messageErr="We dont't found this user in our database"} 
     }) 
 
   }
+
+
+
+
+
+  
 
 }
