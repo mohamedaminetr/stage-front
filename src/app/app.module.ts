@@ -8,12 +8,16 @@ import { DashboardEmployeeComponent } from './employee/dashboard-employee/dashbo
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { GererDemandeComponent } from './admin/gerer-demande/gerer-demande.component';
+import { GererUserComponent } from './admin/gerer-user/gerer-user.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardAdminComponent,
     DashboardEmployeeComponent,
+    GererDemandeComponent,
+    GererUserComponent,
    
   ],
   imports: [

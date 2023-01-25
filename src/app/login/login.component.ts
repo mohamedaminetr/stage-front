@@ -28,8 +28,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private Auth:AuthentificationService,private route:Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   login(){
 
@@ -39,12 +38,12 @@ export class LoginComponent implements OnInit {
         password:this.user.password,
       }
 
-
     };
-    debugger
+    
     this.Auth.login(data).subscribe(
       response => {
         console.log(response);
+        
         if(response.status==401){
      
           Swal.fire({
@@ -52,9 +51,9 @@ export class LoginComponent implements OnInit {
             title: 'Oops...',
             text: 'User Not Found Or invalide Credentialns'
           })
-        }else{
-
-
+        }
+        
+        else{
        if(response.user.email_confirmed==true) {
         if(response.logged_in ==true && response.user.role =="admin"  ){ 
           sessionStorage.setItem( 'admindata', JSON.stringify( response.user ) );

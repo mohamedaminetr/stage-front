@@ -10,10 +10,24 @@ import { environment } from '../environments/environment';
 export class AuthentificationService
  {
   constructor(private http : HttpClient , public router: Router) { }
+  
+  
   login(data:any): Observable<any> {
-
-    
-    return this.http.post(environment.urlBackend + 'sessions/', data);
+return this.http.post(environment.urlBackend + 'sessions/', data);
   }
+
+
+  getalldemande()
+  {
+  return this.http.get(environment.urlBackend + 'demandes/')
+  
+}
+
+
+getstatic()
+{
+return this.http.get(environment.urlBackend + 'static_admin/');
+}
+
 
 }
