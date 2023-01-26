@@ -29,5 +29,35 @@ getstatic()
 return this.http.get(environment.urlBackend + 'static_admin/');
 }
 
+getemploye()
+{
+return this.http.get(environment.urlBackend + 'users/');
+
+}
+
+deleteuser(id:any)
+{
+return this.http.delete(environment.urlBackend+'users/'+id);
+
+}
+
+
+
+deleterequest(id:any)
+{
+return this.http.delete(environment.urlBackend+'demandes/'+id);
+
+}
+
+updatedemande (id:string,newdata:any) {
+  return this.http.patch(environment.urlBackend+'demandes/' + id , newdata )
+}
+
+
+createuser(data:any)
+{
+return this.http.post(environment.urlBackend+'users/', data);
+}
+
 
 }
