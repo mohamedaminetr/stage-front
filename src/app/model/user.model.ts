@@ -1,11 +1,11 @@
 export class User {
     id? : number;
-    lastname? : string;
-    firstname? : string;
+    nom? : string;
+    prenom? : string;
     email? : string;
     adresse? : string;
     password?:string;
-    role?:string;
+    role?:number;
 
     }
     

@@ -13,6 +13,7 @@ export class AuthentificationService
   
   
   login(data:any): Observable<any> {
+
 return this.http.post(environment.urlBackend + 'sessions/', data);
   }
 
@@ -50,14 +51,27 @@ return this.http.delete(environment.urlBackend+'demandes/'+id);
 }
 
 updatedemande (id:string,newdata:any) {
-  return this.http.patch(environment.urlBackend+'demandes/' + id , newdata )
+  return this.http.put(environment.urlBackend+'demandes/' + id , newdata )
 }
 
 
 createuser(data:any)
 {
-return this.http.post(environment.urlBackend+'users/', data);
+  debugger;
+return this.http.post(environment.urlBackend+'registrations/', data);
 }
 
 
+IsloggedIn()
+{
+return !!sessionStorage.getItem('token');
+
+}
+
+
+logout(){
+  sessionStorage.clear()
+  this.router.navigate(['/']);
+
+}
 }

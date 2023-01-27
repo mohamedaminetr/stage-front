@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 import { AuthentificationService } from 'src/app/services/authentification.service';
 import Swal from 'sweetalert2';
 import { User } from 'src/app/model/user.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-gerer-user',
   templateUrl: './gerer-user.component.html',
   styleUrls: ['./gerer-user.component.css']
 })
 export class GererUserComponent {
-
+  addemployee! :  FormGroup;
   dataArrayemploye: any = [];
   dataArray: any = [];
   messageErr: any;
@@ -22,7 +23,12 @@ export class GererUserComponent {
 
     })
 
-
+    this.addemployee = new FormGroup({
+      email: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+      nom: new FormControl('', [Validators.required]),
+      prenom: new FormControl('', [Validators.required]),
+    });
 
     this.userService.getstatic().subscribe(data2 => {
       this.dataArray = data2
@@ -35,6 +41,37 @@ export class GererUserComponent {
 
 
   }
+  user : User ={
+    email:'',
+    password:'',
+    nom:'',
+    prenom:'',
+    role:0
+  }
+  addnewemployee (f:any){
+    const data = {
+      user :{
+        email:this.user.email,
+        password:this.user.password,
+        nom:this.user.nom,
+        role:this.user.role,
+        prenom:this.user.prenom,
+      }
+    };
+   this.userService.createuser(data).subscribe( 
+    Response=>{
+      console.log(Response)
+      Swal.fire('Saved!', '', 'success')
+      window.location.reload()
+  
+    },(err:HttpErrorResponse)=>{
+      this.messageErr=err.error      
+    }) ;
+  }
+
+
+
+
 
   delete(id:any  , i :number){
     Swal.fire({
@@ -58,44 +95,5 @@ export class GererUserComponent {
       }
     })
   }
-
-
-
-  user : User ={
-    email:'',
-    password:'',
-  }
-
-
-
-  addnewemployee (f:any){
-    const data = {
-      user :{
-        email:this.user.email,
-        password:this.user.password,
-        role : this.user.role 
-      }
-    };
-   this.userService.createuser(data).subscribe( 
-    Response=>{
-      console.log(Response)
-      Swal.fire('Saved!', '', 'success')
-      window.location.reload()
-  
-    },(err:HttpErrorResponse)=>{
-      this.messageErr=err.error      
-    }) ;
-  }
-
-
-
-
-
-
-
-
-
-
-
 
 }

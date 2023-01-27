@@ -9,18 +9,18 @@
                         <h1 class="h2 mb-0 ls-tight">Gerer User</h1>
                     </div> <!-- Actions -->
                     <div class="col-sm-6 col-12 text-sm-end">
-                        <div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-neutral border-base mx-1">
-                                <span class=" pe-2"> <i class="bi bi-box-arrow-left"></i> </span> <span>Log Out</span> </a> <a
-                                routerLink="/create-user" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span
-                                    class=" pe-2"> <i class="bi bi-plus"></i> </span> <span>Create User </span> </a>
+                        <div class="mx-n1"> <a 
+                                class="btn d-inline-flex btn-sm btn-neutral border-base mx-1">
+                                <span class=" pe-2"> <i class="bi bi-box-arrow-left"></i> </span> <span>Log Out</span>
+                            </a>
                         </div>
                     </div>
                 </div> <!-- Nav -->
                 <ul class="nav nav-tabs mt-4 overflow-x border-0">
                     <li class="nav-item "> <a routerLink="/dashbord-admin" class="nav-link font-regular">Home</a> </li>
-                    <li class="nav-item"> <a routerLink="/gerer-demande" class="nav-link font-regular">Manage
-                            Request</a> </li>
-                    <li class="nav-item"> <a routerLink="/gerer-user" class="nav-link active">Manage User</a> </li>
+                    <li class="nav-item"> <a routerLink="/gerer-demande" class="nav-link font-regular">The
+                            Requests</a> </li>
+                    <li class="nav-item"> <a routerLink="/gerer-user" class="nav-link active">The Users</a> </li>
                 </ul>
             </div>
         </div>
@@ -81,9 +81,18 @@
             </div>
             <div class="card shadow border-0 mb-7">
                 <div class="card-header">
+
                     <h5 class="mb-0">Users</h5>
+                    <div style="text-align: right;">
+                        <button class="btn d-inline-flex btn-sm btn-primary mx-1"> <span data-toggle="modal"
+                                data-target="#exampleModal1" class="btn btn-sm btn-neutral" class=" pe-2"> Create User +
+                            </span>
+                        </button>
+                    </div>
                 </div>
+
                 <div class="table-responsive">
+
                     <table class="table table-hover table-nowrap">
                         <thead class="thead-light">
                             <tr>
@@ -99,20 +108,24 @@
                         <tbody>
                             <tr *ngFor="let data of dataArrayemploye; index as i">
 
-                                <td *ngIf="data.role == 'employee' ">{{data.id}} </td>
+                                <td *ngIf="data.role == 'employee' ">
+                                <img alt="" src="{{data.user_image_url}}">
+                                </td>
                                 <td *ngIf="data.role == 'employee' "> {{data.nom}} </td>
                                 <td *ngIf="data.role == 'employee' "> {{data.prenom}} </td>
                                 <td *ngIf="data.role == 'employee' "> {{data.email}} </td>
                                 <td *ngIf="data.role == 'employee' "> {{data.balance}} </td>
 
                                 <td *ngIf="data.role == 'employee' " class="text-end"> <button type="button"
-                                        class="btn btn-sm btn-neutral"> Update </button> <button class="bi bi-trash"
+                                       class="btn btn-sm btn-neutral">
+                                        Update </button> <button class="bi bi-trash"
                                         (click)="delete(data.id,i)"></button>
 
                                 </td>
 
                             </tr>
-                            <div class="card-footer border-0 py-5"> <span class="text-muted text-sm"> Showing {{dataArray.users}} Users</span> </div>
+                            <div class="card-footer border-0 py-5"> <span class="text-muted text-sm"> Showing
+                                    {{dataArray.users}} Users</span> </div>
                         </tbody>
                     </table>
                 </div>
@@ -120,4 +133,55 @@
             </div>
         </div>
     </main>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ajouter Employee</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form  [formGroup]="addemployee" #f="ngForm" (ngSubmit)="addnewemployee (f); f.reset()">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Email </label>
+                        <input type="text" name="email" [(ngModel)]="user.email" formControlName="email" class="form-control" rows="3" required>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">firstname </label>
+                        <input type="text" class="form-control" name="prenom" [(ngModel)]="user.prenom" formControlName="prenom"  rows="3" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">LastName </label>
+                        <input type="text" class="form-control" name="nom" [(ngModel)]="user.nom" formControlName="nom" rows="3" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Password </label>
+                        <input type="password" class="form-control" [(ngModel)]="user.password" formControlName="password" name="password" rows="3" required />
+                    </div>
+
+
+
+                    <br>
+                    <div class="form-group">
+                        <button class="btn btn-danger" type="submit">save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
