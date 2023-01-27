@@ -50,8 +50,26 @@ export class GererDemandeComponent {
     });
 
 
+    this.update = new FormGroup({
+      status: new FormControl(''),
+      refus_reason: new FormControl(''),
+    });
+
+
   }
-  
+
+
+
+
+
+
+
+  logout()
+  {
+  this.demandesService.logout();
+}
+
+
 
   delete(id:any  , i :number){
     Swal.fire({
@@ -78,10 +96,18 @@ export class GererDemandeComponent {
 
 
 
+
+  getdata(status:string,refus_reason:string , id:any){
+    this.datademande.id=id
+    this.datademande.status=status
+    console.log(this.datademande)
+  }
+
+
+
   updatedemande (f:any)
   {
-
-    let data=f.value
+   let data=f.value
   const formData = new FormData();
   formData.append('status', this.update.value.status );
   Swal.fire({
@@ -123,7 +149,6 @@ export class GererDemandeComponent {
       Swal.fire('Changes are not saved', '', 'info')
     }
   })
-  
   
   
   

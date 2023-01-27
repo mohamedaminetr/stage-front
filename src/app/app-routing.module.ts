@@ -5,13 +5,14 @@ import { DashboardEmployeeComponent } from './employee/dashboard-employee/dashbo
 import { LoginComponent } from './login/login.component';
 import { GererUserComponent } from './admin/gerer-user/gerer-user.component';
 import { GererDemandeComponent } from './admin/gerer-demande/gerer-demande.component';
+import { AuthguardGuard } from './admin/auth-guard/authguard.guard';
 
 const routes: Routes = [
 {path: '',component:LoginComponent},
-{path:'dashboard-admin',component:DashboardAdminComponent},
-{path:'dashboard-employee',component:DashboardEmployeeComponent},
-{path:'gerer-user',component:GererUserComponent},
-{path:'gerer-demande',component:GererDemandeComponent}
+{path:'dashboard-admin',component:DashboardAdminComponent,canActivate: [AuthguardGuard]},
+{path:'dashboard-employee',component:DashboardEmployeeComponent,canActivate: [AuthguardGuard]},
+{path:'gerer-user',component:GererUserComponent,canActivate: [AuthguardGuard]},
+{path:'gerer-demande',component:GererDemandeComponent,canActivate: [AuthguardGuard]}
 ];
 
 @NgModule({
