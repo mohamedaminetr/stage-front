@@ -41,6 +41,16 @@ export class GererUserComponent {
 
 
   }
+
+  logout()
+  {
+  this.userService.logout();
+}
+
+
+
+
+
   user : User ={
     email:'',
     password:'',
