@@ -19,11 +19,15 @@ return this.http.post(environment.urlBackend + 'sessions/', data);
 
 
   getalldemande()
-  {
+{
   return this.http.get(environment.urlBackend + 'demandes/')
   
 }
 
+getdemande(id:any)
+{
+return this.http.get(environment.urlBackend + 'demandeid/' + id)
+}
 
 getstatic()
 {
@@ -57,7 +61,6 @@ updatedemande (id:string,newdata:any) {
 
 createuser(data:any)
 {
-  debugger;
 return this.http.post(environment.urlBackend+'registrations/', data);
 }
 
@@ -74,4 +77,12 @@ logout(){
   this.router.navigate(['/']);
 
 }
+
+
+createdemande(data:any)
+{
+return this.http.post(environment.urlBackend+'demandes/', data);
+}
+
+
 }
