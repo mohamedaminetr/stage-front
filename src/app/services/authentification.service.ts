@@ -24,7 +24,7 @@ return this.http.post(environment.urlBackend + 'sessions/', data);
   
 }
 
-getdemande(id:any)
+getdemande(id:any): Observable<any>  
 {
 return this.http.get(environment.urlBackend + 'demandeid/' + id)
 }
@@ -37,6 +37,20 @@ return this.http.get(environment.urlBackend + 'static_admin/');
 getemploye()
 {
 return this.http.get(environment.urlBackend + 'users/');
+
+}
+
+getallreasons()
+{
+return this.http.get(environment.urlBackend + 'motif/');
+
+}
+
+
+
+deletemotif(id:any)
+{
+return this.http.delete(environment.urlBackend+'motif/'+id);
 
 }
 
@@ -56,6 +70,11 @@ return this.http.delete(environment.urlBackend+'demandes/'+id);
 
 updatedemande (id:string,newdata:any) {
   return this.http.put(environment.urlBackend+'demandes/' + id , newdata )
+}
+
+createmotif(data:any)
+{
+return this.http.post(environment.urlBackend+'motif/', data);
 }
 
 
@@ -81,6 +100,7 @@ logout(){
 
 createdemande(data:any)
 {
+  debugger
 return this.http.post(environment.urlBackend+'demandes/', data);
 }
 

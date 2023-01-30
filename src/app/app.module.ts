@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { GererDemandeComponent } from './admin/gerer-demande/gerer-demande.component';
 import { GererUserComponent } from './admin/gerer-user/gerer-user.component';
+import { MotifComponent } from './admin/motif/motif.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { GererUserComponent } from './admin/gerer-user/gerer-user.component';
     DashboardAdminComponent,
     DashboardEmployeeComponent,
     GererDemandeComponent,
-    GererUserComponent
+    GererUserComponent,
+    MotifComponent
   ],
   imports: [
     BrowserModule,
