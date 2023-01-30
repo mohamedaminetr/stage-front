@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Demande } from 'src/app/model/demande.model~';
 import { AuthentificationService } from 'src/app/services/authentification.service';
 import Swal from 'sweetalert2';
@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class DashboardEmployeeComponent {
   messageErr: any;
-
+  employeedata:any;
   adddemande! :  FormGroup;
   demande : Demande ={
     start_date: new Date(),
@@ -24,13 +24,14 @@ export class DashboardEmployeeComponent {
     status: 0
   }
   dataArray: any;
+  dataArrayyy: any;
+
+  motifs: any;
 
 
+  constructor(private userService: AuthentificationService, private route: Router,activatedRoute:ActivatedRoute ) {
 
-
-  constructor(private userService: AuthentificationService, private route: Router) {
-
-
+    this.employeedata = JSON.parse( sessionStorage.getItem('employeedata') !);
     this.adddemande = new FormGroup({
       start_date: new FormControl('', [Validators.required]),
       end_date: new FormControl('', [Validators.required]),
@@ -41,12 +42,19 @@ export class DashboardEmployeeComponent {
     });
 
 
+    this.userService.getdemande(this.employeedata.id).subscribe(data=>{
+      console.log(data)   
+      this.dataArrayyy=data,
+  
+      (err:HttpErrorResponse)=>{
+        console.log(err)
+      this.messageErr="We dont't found this category in our database"}
+    }) 
 
 
 
-
-    this.userService.getalldemande().subscribe(data=>{
-      this.dataArray=data
+    this.userService.getallreasons().subscribe(data=>{
+      this.motifs=data
       console.log(this.dataArray)
       
     }) 
@@ -79,6 +87,7 @@ export class DashboardEmployeeComponent {
           'Your file has been deleted.',
           'success'
         )
+        window.location.reload()
       }
     })
   }
@@ -87,17 +96,17 @@ export class DashboardEmployeeComponent {
 
 
   addnewdemande(f:any){
-    const data = {
-      demande :{
-        start_date:this.demande.start_date,
-        end_date:this.demande.end_date,
-        motif_id:this.demande.motif_id,
-        commentaire:this.demande.commentaire,
-        employe_id:this.demande.employe_id,
-        status:this.demande.status,
-      }
-    };
-   this.userService.createdemande(data).subscribe( 
+
+    const formData = new FormData();
+    formData.append('start_date', this.adddemande.value.start_date);
+    formData.append('end_date', this.adddemande.value.end_date);
+    formData.append('description', this.adddemande.value.description);
+    formData.append('motif_id', this.adddemande.value.motif_id);
+    formData.append('employe_id', this.employeedata.id);
+
+  let data=f.value
+
+   this.userService.createdemande(formData).subscribe( 
     Response=>{
       console.log(Response)
       Swal.fire('Saved!', '', 'success')
