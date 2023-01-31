@@ -46,15 +46,17 @@
                             </div>
 
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card shadow border-0">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col"> <span class="h6 font-semibold text-muted text-sm d-block mb-2">Update Profil
-                                        </span> <span class="h3 font-bold mb-0"> </span> </div>
+                                <div class="col"> <span class="h6 font-semibold text-muted text-sm d-block mb-2">
+
+                                        Update Profil
+                                    </span> <span class="h3 font-bold mb-0"> </span> </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-primary text-white text-lg rounded-circle"> <button>
                                             <i data-toggle="modal" data-target="#exampleModal2"
@@ -63,7 +65,7 @@
                             </div>
 
                         </div>
-                        
+
                     </div>
                 </div>
 
@@ -77,9 +79,11 @@
                     <table class="table table-hover table-nowrap">
                         <thead class="thead-light">
                             <tr>
+                                <th scope="col">Cin </th>
                                 <th scope="col">First Name </th>
                                 <th scope="col">Last Name</th>
                                 <th scope="col">Employe Email</th>
+                                <th scope="col">Date_Birthday </th>
                                 <th scope="col">Start Date</th>
                                 <th scope="col">End Date</th>
                                 <th scope="col">Motif</th>
@@ -91,13 +95,15 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let data of dataArrayyy.demandeid; index as i">
+                                <td> {{data.employe.cin}} </td>
                                 <td> {{data.employe.nom}} </td>
                                 <td> {{data.employe.prenom}} </td>
                                 <td> {{data.employe.email}} </td>
+                                <td> {{data.employe.datenaissance}} </td>
                                 <td> {{data.start_date}} </td>
                                 <td> {{data.end_date}} </td>
                                 <td> {{data.motif.reason}} </td>
-                               
+
                                 <td>
                                     <button *ngIf="data.status=='refuse' ">
                                         <p class="text-danger">{{data.status }} </p>
@@ -109,17 +115,18 @@
                                         <p class="text-warning">{{data.status }} </p>
                                     </button>
 
-                                </td>
-                                <td class="text-end"> <button class="btn btn-sm btn-neutral">Update</button> <button
-                                        type="button" (click)="delete(data.id,i)"> <i class="bi bi-trash"></i> </button>
+                                </td> 
+                                <td class="text-end"> <button class="btn btn-sm btn-neutral"  data-toggle="modal" data-target="#exampleModal3" >Update</button> <button
+                                        type="button" (click)="delete(data.id,i)" > <i class="bi bi-trash"></i> </button>
                                 </td>
                             </tr>
 
                         </tbody>
                     </table>
                 </div>
-                <div class="card-footer border-0 py-5"  >  <span class="text-muted text-sm" class="text-muted text-sm"> Showing {{dataArrayyy.nbemploye}} Request
-                        
+                <div class="card-footer border-0 py-5"> <span class="text-muted text-sm" class="text-muted text-sm">
+                        Showing {{dataArrayyy.nbemploye}} Request
+
 
 
                     </span> </div>
@@ -136,7 +143,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ajouter Employee</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Ajouter Demande</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -193,41 +200,93 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update Profil</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Update This Employee</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>  
+            </div>
             <div class="modal-body">
-                <form [formGroup]="adddemande" #f="ngForm" (ngSubmit)="addnewdemande (f); f.reset()">
+                <form [formGroup]="updateuser" #f="ngForm" (ngSubmit)="updateemploye (f); f.reset()">
+
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Start_Date </label>
-                        <input type="date" name="start_date" [(ngModel)]="demande.start_date"
+                        <label for="exampleFormControlTextarea1"> Email </label>
+                        <input  readonly type="email" class="form-control" 
+                            name="text" value="{{employeedata.email}}" rows="3" required />
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">cin </label>
+                        <input  readonly type="number" class="form-control" name="cin" [(ngModel)]="employeedata.cin"
+                            formControlName="cin" rows="3" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">First Name </label>
+                        <input type="text" class="form-control" [(ngModel)]="employeedata.nom" formControlName="nom"
+                            rows="3" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">LastName </label>
+                        <input type="text" class="form-control" [(ngModel)]="employeedata.prenom"
+                            formControlName="prenom" rows="3" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Date_Birthday </label>
+                        <input type="date" class="form-control" [(ngModel)]="employeedata.datenaissance"
+                            formControlName="datenaissance" rows="3" required />
+                    </div>
+
+
+
+
+                    <br>
+                    <div class="form-group">
+                        <button class="btn btn-danger" type="submit">save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update Demande</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="updatedemandeForm"  #f="ngForm" (ngSubmit)="updatedemande (f); f.reset()">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">start_date </label>
+                        <input type="date" name="start_date" [(ngModel)]="dataArrayyy.demandeid.start_date"
                             formControlName="start_date" class="form-control" rows="3" required>
 
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">End_Date </label>
-                        <input type="date" name="end_date" [(ngModel)]="demande.end_date" formControlName="end_date"
+                        <label for="exampleFormControlTextarea1">end_date </label>
+                        <input type="date" name="end_date" [(ngModel)]="dataArrayyy.demandeid.end_date" formControlName="end_date"
                             class="form-control" rows="3" required />
                     </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">First Name</label>
-                        <input type="text" 
-                            class="form-control" rows="3" required>
-
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Last Name </label>
-                        <input type="text"  
-                            class="form-control" rows="3" required>
-
-                    </div>
-
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Abscence Motif </label>
-                        <select class="form-control" formControlName="motif_id">
+                        <select class="form-control" formControlName="reason">
                             <option disabled selected>Select your Abscence </option>
                             <option *ngFor="let item of motifs" [value]="item.id"> {{item.reason}} </option>
 
@@ -235,7 +294,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1"> commentaire </label>
-                        <input type="text" name="commentaire" [(ngModel)]="demande.commentaire"
+                        <input type="text" name="commentaire" [(ngModel)]="dataArrayyy.demandeid.commentaire"
                             formControlName="commentaire" class="form-control" rows="3" required />
                     </div>
 

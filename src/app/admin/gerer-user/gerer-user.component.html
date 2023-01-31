@@ -100,9 +100,11 @@
                         <thead class="thead-light">
                             <tr>
                               <th scope="col"> </th>
+                              <th scope="col">Cin</th>
                                 <th scope="col">First_Name</th>
                                 <th scope="col">Last_Name</th>
                                 <th scope="col">Email</th>
+                                <th scope="col">Date_Birthday</th>
                                 <th scope="col">Balance</th>
 
                                 <th></th>
@@ -114,13 +116,16 @@
                                 <td *ngIf="data.role == 'employee' ">
                                 <img alt="" src="{{data.user_image_url}}">
                                 </td>
+                                <td *ngIf="data.role == 'employee' "> {{data.cin}} </td>
                                 <td *ngIf="data.role == 'employee' "> {{data.nom}} </td>
                                 <td *ngIf="data.role == 'employee' "> {{data.prenom}} </td>
                                 <td *ngIf="data.role == 'employee' "> {{data.email}} </td>
+                                <td *ngIf="data.role == 'employee' "> {{data.datenaissance}} </td>
                                 <td *ngIf="data.role == 'employee' "> {{data.balance}} </td>
 
-                                <td *ngIf="data.role == 'employee' " class="text-end"> <button type="button"
-                                       class="btn btn-sm btn-neutral">
+                                <td *ngIf="data.role == 'employee' " class="text-end"> <button type="button" data-toggle="modal"
+                                    data-target="#exampleModal2"
+                                       class="btn btn-sm btn-neutral"  (click)="getdata(data.id,data.nom,data.prenom,data.cin,data.datenaissance)"> 
                                         Update </button> <button class="bi bi-trash"
                                         (click)="delete(data.id,i)"></button>
 
@@ -165,6 +170,11 @@
 
                     </div>
                     <div class="form-group">
+                        <label for="exampleFormControlInput1">cin </label>
+                        <input type="text" name="cin" [(ngModel)]="user.cin" formControlName="cin" class="form-control" rows="3" required>
+
+                    </div>
+                    <div class="form-group">
                         <label for="exampleFormControlTextarea1">firstname </label>
                         <input type="text" class="form-control" name="prenom" [(ngModel)]="user.prenom" formControlName="prenom"  rows="3" required />
                     </div>
@@ -173,9 +183,69 @@
                         <input type="text" class="form-control" name="nom" [(ngModel)]="user.nom" formControlName="nom" rows="3" required />
                     </div>
                     <div class="form-group">
+                        <label for="exampleFormControlInput1">datenaissance </label>
+                        <input type="date" name="datenaissance" [(ngModel)]="user.datenaissance" formControlName="datenaissance" class="form-control" rows="3" required>
+
+                    </div>
+                    <div class="form-group">
                         <label for="exampleFormControlTextarea1">Password </label>
                         <input type="password" class="form-control" [(ngModel)]="user.password" formControlName="password" name="password" rows="3" required />
                     </div>
+
+
+
+                    <br>
+                    <div class="form-group">
+                        <button class="btn btn-danger" type="submit">save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update This Employee</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form  [formGroup]="updateuser" #f="ngForm" (ngSubmit)="updateemploye (f); f.reset()">
+            
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">cin </label>
+                        <input type="number" class="form-control" name="cin" [(ngModel)]="datauser.cin" formControlName="cin"  rows="3" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">First Name </label>
+                        <input type="text" class="form-control" name="nom" [(ngModel)]="datauser.nom" formControlName="nom" rows="3" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">LastName </label>
+                        <input type="text" class="form-control" name="prenom" [(ngModel)]="datauser.prenom" formControlName="prenom" rows="3" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">LastName </label>
+                        <input type="date" class="form-control" name="datenaissance" [(ngModel)]="datauser.datenaissance" formControlName="datenaissance" rows="3" required />
+                    </div>
+                    
 
 
 

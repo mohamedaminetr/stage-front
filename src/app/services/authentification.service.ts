@@ -68,20 +68,30 @@ return this.http.delete(environment.urlBackend+'demandes/'+id);
 
 }
 
-updatedemande (id:string,newdata:any) {
-  return this.http.put(environment.urlBackend+'demandes/' + id , newdata )
-}
+
 
 createmotif(data:any)
 {
 return this.http.post(environment.urlBackend+'motif/', data);
 }
 
-
+updatemotif(id:string,newdata:any){
+  return this.http.patch(environment.urlBackend+'motif/' + id , newdata )
+}
 createuser(data:any)
 {
 return this.http.post(environment.urlBackend+'registrations/', data);
 }
+
+
+updateuser(id:string,newdata:any){
+return this.http.patch(environment.urlBackend+'users/' + id, newdata)
+}
+
+updatedemande(id:string,newdata:any){
+  return this.http.patch(environment.urlBackend+'demandes/' + id, newdata)
+  }
+  
 
 
 IsloggedIn()

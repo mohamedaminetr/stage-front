@@ -12,8 +12,15 @@ import Swal from 'sweetalert2';
   styleUrls: ['./dashboard-employee.component.css']
 })
 export class DashboardEmployeeComponent {
+
+
+
+
+  updateuser:any;
   messageErr: any;
+demandedata:any;
   employeedata:any;
+  updatedemandeForm:any;
   adddemande! :  FormGroup;
   demande : Demande ={
     start_date: new Date(),
@@ -31,8 +38,30 @@ export class DashboardEmployeeComponent {
 
   constructor(private userService: AuthentificationService, private route: Router,activatedRoute:ActivatedRoute ) {
 
-    this.employeedata = JSON.parse( sessionStorage.getItem('employeedata') !);
+
+
+    this.updateuser=new FormGroup({
+      nom: new FormControl('', Validators.required),
+      prenom: new FormControl('', Validators.required),
+      cin: new FormControl('', Validators.required),
+      datenaissance:new FormControl('', Validators.required)
+      })
+
+
+      this.updatedemandeForm=new FormGroup({
+        start_date: new FormControl('', Validators.required),
+        end_date: new FormControl('', Validators.required),
+        reason: new FormControl('', Validators.required),
+        commentaire:new FormControl('', Validators.required),
+        employe_id: new FormControl('', [Validators.required]),
+        
+        })
+
+
+    this.employeedata = JSON.parse( sessionStorage.getItem('employeedata')!);
+    console.log(this.employeedata); 
     this.adddemande = new FormGroup({
+      email: new FormControl('', Validators.required),
       start_date: new FormControl('', [Validators.required]),
       end_date: new FormControl('', [Validators.required]),
       motif_id: new FormControl('', [Validators.required]),
@@ -98,6 +127,7 @@ export class DashboardEmployeeComponent {
   addnewdemande(f:any){
 
     const formData = new FormData();
+    
     formData.append('start_date', this.adddemande.value.start_date);
     formData.append('end_date', this.adddemande.value.end_date);
     formData.append('description', this.adddemande.value.description);
@@ -142,7 +172,60 @@ export class DashboardEmployeeComponent {
   this.userService.logout();
   }
   
+  updateemploye(f:any)
+  {
   
+    const formData = new FormData();
+
+    formData.append('nom', this.updateuser.value.nom);
+    formData.append('prenom', this.updateuser.value.prenom);
+    formData.append('cin', this.updateuser.value.cin);
+    formData.append('datenaissance', this.updateuser.value.datenaissance);
+
+let data =f.value
+
+this.userService.updateuser(this.employeedata.id,formData).subscribe(
+
+  Response => {
+    console.log(Response)
+    Swal.fire('Saved!', '', 'success')
+    window.location.reload()
+
+  }, (err: HttpErrorResponse) => {
+    this.messageErr = err.error
+
+  })
+}
+
+
+updatedemande(f:any)
+  {
+  
+    const formData = new FormData();
+
+    formData.append('start_date', this.updatedemandeForm.value.start_date);
+    formData.append('end_date', this.updatedemandeForm.value.end_date);
+    formData.append('reason', this.updatedemandeForm.value.motif_id.reason);
+    formData.append('commentaire', this.updatedemandeForm.value.commentaire);
+    formData.append('employe_id', this.updatedemandeForm.id);
+let data =f.value
+
+this.userService.updatedemande(this.dataArrayyy.id,formData).subscribe(
+
+  Response => {
+    console.log(Response)
+    Swal.fire('Saved!', '', 'success')
+    window.location.reload()
+
+  }, (err: HttpErrorResponse) => {
+    this.messageErr = err.error
+
+  })
+}
+
+
+
+
 
 
 
