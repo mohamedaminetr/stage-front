@@ -6,6 +6,8 @@ export class User {
     adresse? : string;
     password?:string;
     role?:number;
+    cin? : number;
+    datenaissance? : Date;
 
     }
     

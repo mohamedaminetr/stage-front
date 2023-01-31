@@ -114,9 +114,10 @@
                             
                                 <td class="text-end"> <button    
                                     
+                                    (click)="getdata(data.reason,data.id)"
                                     
-                                    
-                                 
+                                    data-toggle="modal"
+                                    data-target="#exampleModal2"
                                         class="btn btn-sm btn-neutral">Update</button> <button type="button"
                                         (click)="delete(data.id,i)"> <i class="bi bi-trash"></i> </button> </td>
                             </tr>
@@ -163,6 +164,35 @@
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Motif </label>
                         <input type="text" name="motif"  class="form-control"  formControlName="reason" rows="3" required>
+
+                    </div>
+                 
+
+
+                    <br>
+                    <div class="form-group">
+                        <button class="btn btn-danger" type="submit">save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update this Motif</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form  [formGroup]="updatereasone" #f="ngForm" (ngSubmit)="updatemotif (f); f.reset()" >
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Motif </label>
+                        <input type="text" name="motif"  [(ngModel)]="datareason.reason"  class="form-control"  formControlName="reason" rows="3" required>
 
                     </div>
                  

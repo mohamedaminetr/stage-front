@@ -11,23 +11,30 @@ import Swal from 'sweetalert2';
 })
 export class MotifComponent {
 
-  datareason={
-    reason:'',
+  datareason = {
+    reason: '',
+    id: '',
   }
 
- addmotif:any
-  messageErr =''
-  counter:any
-  dataArray:any = [] ;
-  dataArrayStatic:any = [] ;
+ 
+  updatereasone: any
+  addmotif: any
+  messageErr = ''
+  counter: any
+  dataArray: any = [];
+  dataArrayStatic: any = [];
   update: any;
   messageSuccess: string | undefined;
- 
 
 
 
-  constructor(private demandesService: AuthentificationService,private route:Router  ) {
 
+  constructor(private demandesService: AuthentificationService, private route: Router) {
+
+this.updatereasone=new FormGroup({
+reason: new FormControl('', Validators.required)
+
+})
 
 
     this.addmotif = new FormGroup({
@@ -35,33 +42,35 @@ export class MotifComponent {
 
 
     });
-
-
-
-
-
-
-
-
-
-    this.demandesService.getallreasons().subscribe(data=>{
-      this.dataArray=data
-      console.log(this.dataArray)
-      this.counter = this.dataArray.length , (err:HttpErrorResponse)=>{
-      this.messageErr="We dont't found this user in our database"} 
     
-    }) 
 
 
-    this.demandesService.getstatic().subscribe(data2=>{
-      this.dataArrayStatic=data2
+
+
+
+
+
+
+
+    this.demandesService.getallreasons().subscribe(data => {
+      this.dataArray = data
+      console.log(this.dataArray)
+      this.counter = this.dataArray.length, (err: HttpErrorResponse) => {
+        this.messageErr = "We dont't found this user in our database"
+      }
+
+    })
+
+
+    this.demandesService.getstatic().subscribe(data2 => {
+      this.dataArrayStatic = data2
       console.log(this.dataArrayStatic)
-      
-    }) 
-  
+
+    })
 
 
- 
+
+
 
   }
 
@@ -71,14 +80,13 @@ export class MotifComponent {
 
 
 
-  logout()
-  {
-  this.demandesService.logout();
-}
+  logout() {
+    this.demandesService.logout();
+  }
 
 
 
-  delete(id:any  , i :number){
+  delete(id: any, i: number) {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -89,8 +97,8 @@ export class MotifComponent {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.demandesService.deletemotif(id).subscribe(response=>{
-          this.dataArray.splice(i,1)   
+        this.demandesService.deletemotif(id).subscribe(response => {
+          this.dataArray.splice(i, 1)
         })
         Swal.fire(
           'Deleted!',
@@ -101,28 +109,56 @@ export class MotifComponent {
     })
   }
 
+  getdata(reason:string,id:any){
+    console.log(this.datareason)
+    this.datareason.reason= reason 
+    this.datareason.id= id 
+  
+
+  }
+
+  updatemotif(f:any)
+  {
+  
+    const formData = new FormData();
+    formData.append('reason', this.updatereasone.value.reason);
+
+let data =f.value
+
+this.demandesService.updatemotif(this.datareason.id,formData).subscribe(
+
+  Response => {
+    console.log(Response)
+    Swal.fire('Saved!', '', 'success')
+    window.location.reload()
+
+  }, (err: HttpErrorResponse) => {
+    this.messageErr = err.error
+
+  })
+}
 
 
 
-  addnewmotif(f:any){
+  addnewmotif(f: any) {
 
     const formData = new FormData();
     formData.append('reason', this.addmotif.value.reason);
 
 
-  let data=f.value
+    let data = f.value
 
-   this.demandesService.createmotif(formData).subscribe( 
-    Response=>{
-      console.log(Response)
-      Swal.fire('Saved!', '', 'success')
-      window.location.reload()
-  
-    },(err:HttpErrorResponse)=>{
-      this.messageErr=err.error      
-    }) ;
+    this.demandesService.createmotif(formData).subscribe(
+      Response => {
+        console.log(Response)
+        Swal.fire('Saved!', '', 'success')
+        window.location.reload()
+
+      }, (err: HttpErrorResponse) => {
+        this.messageErr = err.error
+      });
   }
 
-
-
 }
+
+
