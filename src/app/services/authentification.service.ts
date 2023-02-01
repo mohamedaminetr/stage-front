@@ -89,6 +89,7 @@ return this.http.patch(environment.urlBackend+'users/' + id, newdata)
 }
 
 updatedemande(id:string,newdata:any){
+  debugger
   return this.http.patch(environment.urlBackend+'demandes/' + id, newdata)
   }
   
@@ -114,5 +115,8 @@ createdemande(data:any)
 return this.http.post(environment.urlBackend+'demandes/', data);
 }
 
+updateuserimage (id:string,newprofile:any){
+  return this.http.patch(environment.urlBackend+'updateadminimage/' + id , newprofile )
+}
 
 }

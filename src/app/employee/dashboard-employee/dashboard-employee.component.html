@@ -6,7 +6,7 @@
                 <div class="row align-items-center">
                     <div class="col-sm-6 col-12 mb-4 mb-sm-0">
                         <!-- Title -->
-                        <h1 class="h2 mb-0 ls-tight">Application </h1>
+                        <h1 class="h2 mb-0 ls-tight">Welcome {{employeedata.prenom}} {{employeedata.nom}}</h1>
                     </div> <!-- Actions -->
                     <div class="col-sm-6 col-12 text-sm-end">
                         <div class="mx-n1"> <a (click)="logout()"
@@ -32,6 +32,26 @@
             <!-- Card stats -->
             <div class="row g-6 mb-6">
 
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card shadow border-0">
+                        <div class="card-body">
+                            <form [formGroup]="imageupdate" #f="ngForm" (ngSubmit)="updateimage(f)">
+                                <div class="row">
+                                    <img [src]="employeedata.user_image_url" width="50px"
+                                        class="img-circle profile-avatar" alt="User avatar">
+
+                                    <input type="file" class="form-control" (change)="fileChange($event)"
+                                        [defaultValue]="" class="form-control" formControlName="avatar" rows="3"
+                                        width="50px" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary px-4"
+                                    style="background-color: rgb(38, 8, 158);">Update Image</button>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card shadow border-0">
                         <div class="card-body">
@@ -115,9 +135,12 @@
                                         <p class="text-warning">{{data.status }} </p>
                                     </button>
 
-                                </td> 
-                                <td class="text-end"> <button class="btn btn-sm btn-neutral"  data-toggle="modal" data-target="#exampleModal3" >Update</button> <button
-                                        type="button" (click)="delete(data.id,i)" > <i class="bi bi-trash"></i> </button>
+                                </td>
+                                <td class="text-end" *ngFor="let data of dataArrayyy.demandeid; index as i"> <button
+                                        class="btn btn-sm btn-neutral" data-toggle="modal" data-target="#exampleModal3"
+                                        (click)="getdata(data.id,data.start_date,data.end_date,data.commentaire,data.motif.reason)">Update</button>
+                                    <button type="button" (click)="delete(data.id,i)"> <i class="bi bi-trash"></i>
+                                    </button>
                                 </td>
                             </tr>
 
@@ -200,7 +223,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update This Employee</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Update my Profile</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -210,15 +233,15 @@
 
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1"> Email </label>
-                        <input  readonly type="email" class="form-control" 
-                            name="text" value="{{employeedata.email}}" rows="3" required />
+                        <input readonly type="email" class="form-control" name="text" value="{{employeedata.email}}"
+                            rows="3" required />
                     </div>
 
 
 
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">cin </label>
-                        <input  readonly type="number" class="form-control" name="cin" [(ngModel)]="employeedata.cin"
+                        <input readonly type="number" class="form-control" name="cin" [(ngModel)]="employeedata.cin"
                             formControlName="cin" rows="3" required />
                     </div>
                     <div class="form-group">
@@ -236,8 +259,6 @@
                         <input type="date" class="form-control" [(ngModel)]="employeedata.datenaissance"
                             formControlName="datenaissance" rows="3" required />
                     </div>
-
-
 
 
                     <br>
@@ -272,29 +293,28 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form [formGroup]="updatedemandeForm"  #f="ngForm" (ngSubmit)="updatedemande (f); f.reset()">
+                <form [formGroup]="updatedemandeForm" #f="ngForm" (ngSubmit)="updatedemande (f); f.reset()">
                     <div class="form-group">
                         <label for="exampleFormControlInput1">start_date </label>
-                        <input type="date" name="start_date" [(ngModel)]="dataArrayyy.demandeid.start_date"
+                        <input type="date" name="start_date" [(ngModel)]="datademande.start_date"
                             formControlName="start_date" class="form-control" rows="3" required>
 
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">end_date </label>
-                        <input type="date" name="end_date" [(ngModel)]="dataArrayyy.demandeid.end_date" formControlName="end_date"
-                            class="form-control" rows="3" required />
+                        <input type="date" name="end_date" [(ngModel)]="datademande.end_date"
+                            formControlName="end_date" class="form-control" rows="3" required />
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Abscence Motif </label>
-                        <select class="form-control" formControlName="reason">
+                        <select class="form-control" formControlName="reason" >
                             <option disabled selected>Select your Abscence </option>
                             <option *ngFor="let item of motifs" [value]="item.id"> {{item.reason}} </option>
-
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1"> commentaire </label>
-                        <input type="text" name="commentaire" [(ngModel)]="dataArrayyy.demandeid.commentaire"
+                        <input type="text" name="commentaire" [(ngModel)]="datademande.commentaire"
                             formControlName="commentaire" class="form-control" rows="3" required />
                     </div>
 

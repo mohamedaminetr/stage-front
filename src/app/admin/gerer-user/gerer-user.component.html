@@ -114,7 +114,7 @@
                             <tr *ngFor="let data of dataArrayemploye; index as i">
 
                                 <td *ngIf="data.role == 'employee' ">
-                                <img alt="" src="{{data.user_image_url}}">
+                                <img alt="" src="{{data.user_image_url}}" width="50px">
                                 </td>
                                 <td *ngIf="data.role == 'employee' "> {{data.cin}} </td>
                                 <td *ngIf="data.role == 'employee' "> {{data.nom}} </td>

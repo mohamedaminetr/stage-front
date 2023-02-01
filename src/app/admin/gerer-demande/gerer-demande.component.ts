@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthentificationService } from 'src/app/services/authentification.service';
 import Swal from 'sweetalert2';
@@ -45,15 +45,12 @@ export class GererDemandeComponent {
 
 
     this.update = new FormGroup({
-      status: new FormControl(''),
-      refus_reason: new FormControl(''),
+      status: new FormControl('', [Validators.required])
+
     });
 
 
-    this.update = new FormGroup({
-      status: new FormControl(''),
-      refus_reason: new FormControl(''),
-    });
+    
 
 
   }
@@ -97,62 +94,34 @@ export class GererDemandeComponent {
 
 
 
-  getdata(status:string,refus_reason:string , id:any){
+  getdata(status:string, id:any){
     this.datademande.id=id
     this.datademande.status=status
     console.log(this.datademande)
   }
 
-
-
-  updatedemande (f:any)
+  updatedemande(f:any)
   {
-   let data=f.value
-  const formData = new FormData();
-  formData.append('status', this.update.value.status );
-  Swal.fire({
-    title: 'Action Irreversible,Do you want to save the changes?',
-    showDenyButton: true,
-    showCancelButton: true,
-    confirmButtonText: 'Save',
-    denyButtonText: `Don't save`,
-  }).then((result) => {
+    const formData = new FormData();
+    formData.append('status', this.update.value.status);
 
-    if (result.isConfirmed) {
-      this.demandesService.updatedemande(this.dataArray.id,formData).subscribe(response=>
-        {
-  
-          let indexId=this.dataArray.findIndex((obj:any)=>obj.id==this.dataArray.id)
-  
-          //this.dataArray[indexId].id=data.id
-          this.dataArray[indexId].status=data.status
-          this.dataArray[indexId].refus_reason=data.refus_reason
-  
-          this.messageSuccess=`this demande : ${this.dataArray[indexId].status} is updated`
-  
-         this.route.navigate(['/postulated-missions-client']);
-  
-        },(err:HttpErrorResponse)=>{
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'You cant update twice!',
-            footer: '<a href="">Why do I have this issue?</a>'
-          })
-  
-        })
-      Swal.fire('Saved!', '', 'success')
-      window.location.reload()
-    } 
-    
-    else if (result.isDenied) {
-      Swal.fire('Changes are not saved', '', 'info')
-    }
+let data =f.value
+
+this.demandesService.updatedemande(this.datademande.id,formData).subscribe(
+
+  Response => {
+    console.log(Response)
+    Swal.fire('Saved!', '', 'success')
+    window.location.reload()
+
+  }, (err: HttpErrorResponse) => {
+    this.messageErr = err.error
+
   })
-  
-  
-  
-  }
+}
+
+
+
 
 
   
