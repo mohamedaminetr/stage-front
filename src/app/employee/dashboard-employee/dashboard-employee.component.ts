@@ -15,6 +15,16 @@ export class DashboardEmployeeComponent {
 
 
 
+datademande=
+{
+  start_date:'',
+  end_date:'',
+  commentaire:'',
+  reason:'',
+id:''
+
+}
+
 
   updateuser:any;
   messageErr: any;
@@ -22,6 +32,7 @@ demandedata:any;
   employeedata:any;
   updatedemandeForm:any;
   adddemande! :  FormGroup;
+
   demande : Demande ={
     start_date: new Date(),
     end_date: new Date(),
@@ -30,16 +41,21 @@ demandedata:any;
     employe_id: 0, 
     status: 0
   }
+
+
   dataArray: any;
   dataArrayyy: any;
 
   motifs: any;
-
+  image: any;
+  imageupdate!: any;
 
   constructor(private userService: AuthentificationService, private route: Router,activatedRoute:ActivatedRoute ) {
 
 
+    this.imageupdate = new FormGroup({ avatar: new FormControl('', [Validators.required]), });
 
+    
     this.updateuser=new FormGroup({
       nom: new FormControl('', Validators.required),
       prenom: new FormControl('', Validators.required),
@@ -53,9 +69,10 @@ demandedata:any;
         end_date: new FormControl('', Validators.required),
         reason: new FormControl('', Validators.required),
         commentaire:new FormControl('', Validators.required),
-        employe_id: new FormControl('', [Validators.required]),
+
         
         })
+
 
 
     this.employeedata = JSON.parse( sessionStorage.getItem('employeedata')!);
@@ -71,6 +88,7 @@ demandedata:any;
     });
 
 
+
     this.userService.getdemande(this.employeedata.id).subscribe(data=>{
       console.log(data)   
       this.dataArrayyy=data,
@@ -83,7 +101,9 @@ demandedata:any;
 
 
     this.userService.getallreasons().subscribe(data=>{
+      
       this.motifs=data
+   
       console.log(this.dataArray)
       
     }) 
@@ -96,7 +116,9 @@ demandedata:any;
 
 
   }
-
+  fileChange(event:any) {
+    this.image =event.target.files[0];   
+  }
   delete(id:any  , i :number){
     Swal.fire({
       title: 'Are you sure?',
@@ -131,7 +153,7 @@ demandedata:any;
     formData.append('start_date', this.adddemande.value.start_date);
     formData.append('end_date', this.adddemande.value.end_date);
     formData.append('description', this.adddemande.value.description);
-    formData.append('motif_id', this.adddemande.value.motif_id);
+    formData.append('reason', this.adddemande.value.reason);
     formData.append('employe_id', this.employeedata.id);
 
   let data=f.value
@@ -146,6 +168,40 @@ demandedata:any;
       this.messageErr=err.error      
     }) ;
   }
+  updateimage(f:any){
+    let data=f.value
+    const imageformadata = new FormData();
+    imageformadata.append('avatar', this.image );
+    Swal.fire({
+      title: 'Do you want to save the changes?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        console.log(data)
+        
+        this.userService.updateuserimage(this.employeedata.id,imageformadata).subscribe(response=>
+          {
+            
+            
+            sessionStorage.setItem( 'employeedata', JSON.stringify( response ) );
+            window.location.reload();
+         
+    
+          },(err:HttpErrorResponse)=>{
+          
+          })
+    //   this.route.navigate(['/dashbord-freelancer']);
+        Swal.fire('Saved!', '', 'success')
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info')
+      }
+    })
+    
+  } 
 
 
 
@@ -198,6 +254,26 @@ this.userService.updateuser(this.employeedata.id,formData).subscribe(
 }
 
 
+
+
+
+
+
+
+
+getdata(id:any,start_date:any,end_date:any,commentaire:any,reason:any)
+{
+
+  console.log(this.datademande)
+  this.datademande.start_date= start_date,
+  this.datademande.end_date= end_date,
+  this.datademande.commentaire= commentaire,
+  this.datademande.reason= reason,
+  this.datademande.id= id 
+
+}
+
+
 updatedemande(f:any)
   {
   
@@ -205,12 +281,11 @@ updatedemande(f:any)
 
     formData.append('start_date', this.updatedemandeForm.value.start_date);
     formData.append('end_date', this.updatedemandeForm.value.end_date);
-    formData.append('reason', this.updatedemandeForm.value.motif_id.reason);
+    formData.append('reason', this.updatedemandeForm.value.reason);
     formData.append('commentaire', this.updatedemandeForm.value.commentaire);
-    formData.append('employe_id', this.updatedemandeForm.id);
 let data =f.value
 
-this.userService.updatedemande(this.dataArrayyy.id,formData).subscribe(
+this.userService.updatedemande(this.datademande.id,formData).subscribe(
 
   Response => {
     console.log(Response)
@@ -222,12 +297,6 @@ this.userService.updatedemande(this.dataArrayyy.id,formData).subscribe(
 
   })
 }
-
-
-
-
-
-
 
 
 
