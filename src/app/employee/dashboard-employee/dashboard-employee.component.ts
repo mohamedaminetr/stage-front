@@ -20,7 +20,7 @@ datademande=
   start_date:'',
   end_date:'',
   commentaire:'',
-  reason:'',
+  motif_id:'',
 id:''
 
 }
@@ -67,7 +67,7 @@ demandedata:any;
       this.updatedemandeForm=new FormGroup({
         start_date: new FormControl('', Validators.required),
         end_date: new FormControl('', Validators.required),
-        reason: new FormControl('', Validators.required),
+        motif_id: new FormControl('', Validators.required),
         commentaire:new FormControl('', Validators.required),
 
         
@@ -152,9 +152,10 @@ demandedata:any;
     
     formData.append('start_date', this.adddemande.value.start_date);
     formData.append('end_date', this.adddemande.value.end_date);
-    formData.append('description', this.adddemande.value.description);
-    formData.append('reason', this.adddemande.value.reason);
+    formData.append('commentaire', this.adddemande.value.commentaire);
+    formData.append('motif_id', this.adddemande.value.motif_id);
     formData.append('employe_id', this.employeedata.id);
+  
 
   let data=f.value
 
@@ -261,14 +262,14 @@ this.userService.updateuser(this.employeedata.id,formData).subscribe(
 
 
 
-getdata(id:any,start_date:any,end_date:any,commentaire:any,reason:any)
+getdata(id:any,start_date:any,end_date:any,commentaire:any,motif_id:any)
 {
 
   console.log(this.datademande)
   this.datademande.start_date= start_date,
   this.datademande.end_date= end_date,
   this.datademande.commentaire= commentaire,
-  this.datademande.reason= reason,
+  this.datademande.motif_id= motif_id,
   this.datademande.id= id 
 
 }
@@ -281,11 +282,11 @@ updatedemande(f:any)
 
     formData.append('start_date', this.updatedemandeForm.value.start_date);
     formData.append('end_date', this.updatedemandeForm.value.end_date);
-    formData.append('reason', this.updatedemandeForm.value.reason);
+    formData.append('motif_id', this.updatedemandeForm.value.motif_id);
     formData.append('commentaire', this.updatedemandeForm.value.commentaire);
 let data =f.value
 
-this.userService.updatedemande(this.datademande.id,formData).subscribe(
+this.userService.updatedemandebymotif(this.datademande.id,formData).subscribe(
 
   Response => {
     console.log(Response)
