@@ -136,11 +136,20 @@
                                     </button>
 
                                 </td>
-                                <td class="text-end" *ngFor="let data of dataArrayyy.demandeid; index as i"> <button
+                                <td class="text-end"  > <button 
                                         class="btn btn-sm btn-neutral" data-toggle="modal" data-target="#exampleModal3"
-                                        (click)="getdata(data.id,data.start_date,data.end_date,data.commentaire,data.motif.reason)">Update</button>
-                                    <button type="button" (click)="delete(data.id,i)"> <i class="bi bi-trash"></i>
-                                    </button>
+                                        (click)="getdata(data.id,data.start_date,data.end_date,data.commentaire,data.motif_id)">Update</button> 
+                                    
+
+                                        <button
+                                        *ngIf="data.status==='encours' "
+                            
+                                         (click)="delete(data.id , i)"
+                                         class="delete"><i class="bi bi-trash"></i> </button>
+                                        <button
+                                        *ngIf="data.status==='accepter' ||data.status==='refuse' "
+                                         readonly style="cursor: not-allowed;"
+                                         class="delete"> <i class="bi bi-trash"></i> </button>
                                 </td>
                             </tr>
 
@@ -307,7 +316,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Abscence Motif </label>
-                        <select class="form-control" formControlName="reason" >
+                        <select class="form-control" formControlName="motif_id" >
                             <option disabled selected>Select your Abscence </option>
                             <option *ngFor="let item of motifs" [value]="item.id"> {{item.reason}} </option>
                         </select>

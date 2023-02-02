@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
       response => {
         console.log(response);
         
-        if(response.status==401){
+        if(response.status=='not_found'){
      
           Swal.fire({
             icon: 'error',
