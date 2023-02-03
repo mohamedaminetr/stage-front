@@ -31,7 +31,7 @@ return this.http.get(environment.urlBackend + 'demandeid/' + id)
 
 getstatic()
 {
-return this.http.get(environment.urlBackend + 'static_admin/');
+return this.http.get<any>(environment.urlBackend + 'static_admin/');
 }
 
 getemploye()
