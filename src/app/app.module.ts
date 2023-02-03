@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { GererDemandeComponent } from './admin/gerer-demande/gerer-demande.component';
 import { GererUserComponent } from './admin/gerer-user/gerer-user.component';
 import { MotifComponent } from './admin/motif/motif.component';
+import { ChartsModule  } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MotifComponent } from './admin/motif/motif.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
