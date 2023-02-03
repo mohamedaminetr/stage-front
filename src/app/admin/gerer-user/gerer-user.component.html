@@ -125,7 +125,7 @@
 
                                 <td *ngIf="data.role == 'employee' " class="text-end"> <button type="button" data-toggle="modal"
                                     data-target="#exampleModal2"
-                                       class="btn btn-sm btn-neutral"  (click)="getdata(data.id,data.nom,data.prenom,data.cin,data.datenaissance)"> 
+                                       class="btn btn-sm btn-neutral"  (click)="getdata(data.id,data.nom,data.prenom,data.cin,data.datenaissance,data.balance)"> 
                                         Update </button> <button class="bi bi-trash"
                                         (click)="delete(data.id,i)"></button>
 
@@ -242,9 +242,15 @@
                         <input type="text" class="form-control" name="prenom" [(ngModel)]="datauser.prenom" formControlName="prenom" rows="3" required />
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">LastName </label>
+                        <label for="exampleFormControlTextarea1">Date_Birthday </label>
                         <input type="date" class="form-control" name="datenaissance" [(ngModel)]="datauser.datenaissance" formControlName="datenaissance" rows="3" required />
                     </div>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Balance </label>
+                        <input type="number" class="form-control" name="balance" [(ngModel)]="datauser.balance" formControlName="balance" rows="3" required />
+                    </div>
+                    
                     
 
 
