@@ -18,7 +18,8 @@ nom:'',
 prenom:'',
 id: '',
 cin:'',
-datenaissance:new Date()
+datenaissance:new Date(),
+balance:''
 
 
 
@@ -39,7 +40,8 @@ datenaissance:new Date()
       nom: new FormControl('', Validators.required),
       prenom: new FormControl('', Validators.required),
       cin: new FormControl('', Validators.required),
-      datenaissance:new FormControl('', Validators.required)
+      datenaissance:new FormControl('', Validators.required),
+      balance:new FormControl('', Validators.required)
       })
 
 
@@ -144,13 +146,14 @@ datenaissance:new Date()
 
 
 
-  getdata(id:any,nom:string,prenom:string,cin:any,datenaissance:Date){
+  getdata(id:any,nom:string,prenom:string,cin:any,datenaissance:Date,balance:any){
     console.log(this.datauser)
     this.datauser.id= id 
     this.datauser.nom= nom 
     this.datauser.prenom= prenom 
     this.datauser.cin=cin
     this.datauser.datenaissance=datenaissance
+    this.datauser.balance=balance
 
   }
 
@@ -163,6 +166,7 @@ datenaissance:new Date()
     formData.append('prenom', this.updateuser.value.prenom);
     formData.append('cin', this.updateuser.value.cin);
     formData.append('datenaissance', this.updateuser.value.datenaissance);
+    formData.append('balance', this.updateuser.value.balance);
 
 let data =f.value
 
