@@ -26,8 +26,8 @@ data: any;
     this.admindata = JSON.parse(sessionStorage.getItem('admindata')!);
     console.log(this.admindata)
     this.chartType = 'pie';
-    this.chartLabels = ['Request Accepted',  'Employee', 'Request Refused','Request In Progress'];
-  
+    this.chartLabels = ['Request Refused',  'Employee', 'Request In Progress','Request Accepted '];
+   
     this.chartColors = [
       {
         backgroundColor: [
@@ -54,7 +54,7 @@ data: any;
       
       this.result = data2;
       this.chartDatasets =[ 
-        { data: [data2.data[0]['acepted'], data2.data[0]['users'], data2.data[0]['refused'], data2.data[0]['encours']],label: 'Com&Dev Officiel statistic'  }
+        { data: [data2.data[0]['refused'], data2.data[0]['users'], data2.data[0]['encours'], data2.data[0]['acepted']],label: 'Com&Dev Officiel statistic'  }
       ];
       this.dataArrayStatic=data2
       console.log(this.dataArrayStatic)
