@@ -98,10 +98,12 @@
 
                                        The balance
                                     </span> <span class="h3 font-bold mb-0"> </span> </div>
-                                <div class="col-auto"> <tr *ngFor="let data of dataArrayyy.demandeid; index as i">
+                                <div class="col-auto"> <div *ngFor="let data of dataArrayyy.demandeid"> 
                                     <div class="icon icon-shape bg-primary text-white text-lg rounded-circle"> 
-                                            <i data-toggle="modal" data-target="#exampleModal2"
-                                                ></i> {{data.employe.balance}} </div></tr>
+                                            <i 
+                                                ></i>{{data.employe.balance}} 
+                                            
+                                            </div> </div>
                                 </div>
                             </div>
 
@@ -148,31 +150,37 @@
                             
                                 <td>
                                     <button *ngIf="data.status=='refuse' ">
-                                        <p class="text-danger">{{data.status }} </p>
+                                        <p class="text-danger">{{data.status}} </p>
                                     </button>
-                                    <button *ngIf="data.status=='accepter' ">
-                                        <p class="text-success">{{data.status }} </p>
+                                    <button *ngIf="data.status=='accept' ">
+                                        <p class="text-success">{{data.status}} </p>
                                     </button>
-                                    <button *ngIf="data.status=='encours'">
-                                        <p class="text-warning">{{data.status }} </p>
+                                    <button *ngIf="data.status=='inprogress'">
+                                        <p class="text-warning">{{data.status}} </p>
                                     </button>
 
                                 </td>
                                
-                                <td class="text-end"  > <button 
-                                        class="btn btn-sm btn-neutral" data-toggle="modal" data-target="#exampleModal3"
-                                        (click)="getdata(data.id,data.start_date,data.end_date,data.commentaire,data.motif_id)">Update</button> 
+                                <td class="text-end"  > <button    *ngIf="data.status=='accept' || data.status=='refuse'"
+                                    readonly style="cursor: not-allowed;" > update</button> <button
+                                    *ngIf="data.status==='inprogress' "
+                                        data-toggle="modal" data-target="#exampleModal3"
+                                        (click)="getdata(data.id,data.start_date,data.end_date,data.commentaire,data.motif_id)" 
+                                       >Update</button> 
+
+                                        
                                     
 
                                         <button
-                                        *ngIf="data.status==='encours' "
+                                        *ngIf="data.status==='inprogress' "
                             
                                          (click)="delete(data.id , i)"
                                          class="delete"><i class="bi bi-trash"></i> </button>
                                         <button
-                                        *ngIf="data.status==='accepter' ||data.status==='refuse' "
+                                        *ngIf="data.status==='accept' ||data.status==='refuse' "
                                          readonly style="cursor: not-allowed;"
                                          class="delete"> <i class="bi bi-trash"></i> </button>
+                                         
                                 </td>
                             </tr>
 

@@ -89,7 +89,7 @@ return this.http.patch(environment.urlBackend+'users/' + id, newdata)
 }
 
 updatedemande(id:string,newdata:any){
-  debugger
+ 
   return this.http.patch(environment.urlBackend+'demandes/' + id, newdata)
   }
   
@@ -111,7 +111,7 @@ logout(){
 
 createdemande(data:any)
 {
-  debugger
+  
 return this.http.post(environment.urlBackend+'demandes/', data);
 }
 

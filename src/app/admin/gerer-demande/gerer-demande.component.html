@@ -56,7 +56,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col"> <span class="h6 font-semibold text-muted text-sm d-block mb-2">Request
-                                        Accepted</span> <span
+                                    accept</span> <span
                                         class="h3 font-bold mb-0">{{dataArrayStatic.data[0].acepted}}</span> </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-info text-white text-lg rounded-circle"> <i
@@ -112,8 +112,8 @@
                                 <td> {{data.employe.balance}}       </td>
                                 <td> 
                                 <button *ngIf="data.status=='refuse' " >  <p class="text-danger">{{data.status }} </p>     </button>
-                                <button *ngIf="data.status=='accepter' " >  <p class="text-success">{{data.status }} </p>     </button>
-                                <button *ngIf="data.status=='encours'" >  <p class="text-warning">{{data.status }} </p>     </button>
+                                <button *ngIf="data.status=='accept' " >  <p class="text-success">{{data.status }} </p>     </button>
+                                <button *ngIf="data.status=='inprogress'" >  <p class="text-warning">{{data.status }} </p>     </button>
                                 
                                 </td>
                                 <td class="text-end"> <button  [formGroup]="update" #f="ngForm" 
@@ -124,12 +124,12 @@
                                         class="btn btn-sm btn-neutral" data-toggle="modal"
                                         data-target="#exampleModal1"  >Update</button>  
                                         <button
-                                        *ngIf="data.status==='encours' ||data.status==='refuse'"
+                                        *ngIf="data.status==='inprogress' ||data.status==='refuse'"
                             
                                          (click)="delete(data.id , i)"
                                          class="delete"><i class="bi bi-trash"></i> </button>
                                         <button
-                                        *ngIf="data.status==='accepter' "
+                                        *ngIf="data.status==='accept' "
                                          readonly style="cursor: not-allowed;"
                                          class="delete"> <i class="bi bi-trash"></i> </button> </td>
                             </tr>
@@ -159,8 +159,8 @@
                         <label for="exampleFormControlInput1">Status </label>
                         <select  [(ngModel)]="datademande.status"
                         formControlName="status" class="form-control" >
-                            <option> encours</option>
-                            <option >accepter</option>
+                            <option> inprogress</option>
+                            <option >accept</option>
                             <option>refuse </option>
                         </select>
 
