@@ -149,21 +149,21 @@
                                 <td> {{data.motif.reason}} </td>
                             
                                 <td>
-                                    <button *ngIf="data.status=='refuse' ">
+                                    <button *ngIf="data.status=='refusé' ">
                                         <p class="text-danger">{{data.status}} </p>
                                     </button>
-                                    <button *ngIf="data.status=='accept' ">
+                                    <button *ngIf="data.status=='accepté' ">
                                         <p class="text-success">{{data.status}} </p>
                                     </button>
-                                    <button *ngIf="data.status=='inprogress'">
+                                    <button *ngIf="data.status=='encours'">
                                         <p class="text-warning">{{data.status}} </p>
                                     </button>
 
                                 </td>
                                
-                                <td class="text-end"  > <button    *ngIf="data.status=='accept' || data.status=='refuse'"
+                                <td class="text-end"  > <button    *ngIf="data.status=='accepté' || data.status=='refusé'"
                                     readonly style="cursor: not-allowed;" > Modifier</button> <button
-                                    *ngIf="data.status==='inprogress' "
+                                    *ngIf="data.status==='encours' "
                                         data-toggle="modal" data-target="#exampleModal3"
                                         (click)="getdata(data.id,data.start_date,data.end_date,data.commentaire,data.motif_id)" 
                                        >Modifier</button> 
@@ -172,12 +172,12 @@
                                     
 
                                         <button
-                                        *ngIf="data.status==='inprogress' "
+                                        *ngIf="data.status==='encours' "
                             
                                          (click)="delete(data.id , i)"
                                          class="delete"><i class="bi bi-trash"></i> </button>
                                         <button
-                                        *ngIf="data.status==='accept' ||data.status==='refuse' "
+                                        *ngIf="data.status==='accepté' ||data.status==='refusé' "
                                          readonly style="cursor: not-allowed;"
                                          class="delete"> <i class="bi bi-trash"></i> </button>
                                          

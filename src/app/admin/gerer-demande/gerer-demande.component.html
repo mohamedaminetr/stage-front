@@ -111,9 +111,9 @@
                                 <td> {{data.motif.reason}} </td>
                                 <td> {{data.employe.balance}}       </td>
                                 <td> 
-                                <button *ngIf="data.status=='refuse' " >  <p class="text-danger">{{data.status }} </p>     </button>
-                                <button *ngIf="data.status=='accept' " >  <p class="text-success">{{data.status }} </p>     </button>
-                                <button *ngIf="data.status=='inprogress'" >  <p class="text-warning">{{data.status }} </p>     </button>
+                                <button *ngIf="data.status=='refusé' " >  <p class="text-danger">{{data.status }} </p>     </button>
+                                <button *ngIf="data.status=='accepté' " >  <p class="text-success">{{data.status }} </p>     </button>
+                                <button *ngIf="data.status=='encours'" >  <p class="text-warning">{{data.status }} </p>     </button>
                                 
                                 </td>
                                 <td class="text-end"> <button  [formGroup]="update" #f="ngForm" 
@@ -124,12 +124,12 @@
                                         class="btn btn-sm btn-neutral" data-toggle="modal"
                                         data-target="#exampleModal1"  >Modifier</button>  
                                         <button
-                                        *ngIf="data.status==='inprogress' ||data.status==='refuse'"
+                                        *ngIf="data.status==='encours' ||data.status==='refusé'"
                             
                                          (click)="delete(data.id , i)"
                                          class="delete"><i class="bi bi-trash"></i> </button>
                                         <button
-                                        *ngIf="data.status==='accept' "
+                                        *ngIf="data.status==='accepté' "
                                          readonly style="cursor: not-allowed;"
                                          class="delete"> <i class="bi bi-trash"></i> </button> </td>
                             </tr>
@@ -159,9 +159,9 @@
                         <label for="exampleFormControlInput1">Status </label>
                         <select  [(ngModel)]="datademande.status"
                         formControlName="status" class="form-control" >
-                            <option> inprogress</option>
-                            <option >accept</option>
-                            <option>refuse </option>
+                            <option> encours</option>
+                            <option >accepté</option>
+                            <option>refusé </option>
                         </select>
 
                     </div>
