@@ -121,21 +121,21 @@ demandedata:any;
   }
   delete(id:any  , i :number){
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title:  'Es-tu sûr?' ,
+      text:  "Vous ne pourrez pas revenir en arrière " ,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Oui, supprimez-le !' 
     }).then((result) => {
       if (result.isConfirmed) {
         this.userService.deleterequest(id).subscribe(response=>{
           this.dataArray.splice(i,1)   
         })
         Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
+          'Supprimé!',
+          'Votre fichier a été supprimé.' ,
           'success'
         )
         window.location.reload()
@@ -162,7 +162,7 @@ demandedata:any;
    this.userService.createdemande(formData).subscribe( 
     Response=>{
       console.log(Response)
-      Swal.fire('Saved!', '', 'success')
+      Swal.fire('Enregistré!', '', 'success')
       window.location.reload()
   
     },(err:HttpErrorResponse)=>{
@@ -196,9 +196,9 @@ demandedata:any;
           
           })
     //   this.route.navigate(['/dashbord-freelancer']);
-        Swal.fire('Saved!', '', 'success')
+        Swal.fire('Enregistré!', '', 'success')
       } else if (result.isDenied) {
-        Swal.fire('Changes are not saved', '', 'info')
+        Swal.fire('Les modifications ne sont pas enregistrées', '', 'info')
       }
     })
     
@@ -245,7 +245,7 @@ this.userService.updateuser(this.employeedata.id,formData).subscribe(
 
   Response => {
     console.log(Response)
-    Swal.fire('Saved!', '', 'success')
+    Swal.fire('Enregistré!', '', 'success')
     window.location.reload()
 
   }, (err: HttpErrorResponse) => {
@@ -290,7 +290,7 @@ this.userService.updatedemandebymotif(this.datademande.id,formData).subscribe(
 
   Response => {
     console.log(Response)
-    Swal.fire('Saved!', '', 'success')
+    Swal.fire('Enregistré!', '', 'success')
     window.location.reload()
 
   }, (err: HttpErrorResponse) => {

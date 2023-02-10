@@ -26,7 +26,7 @@ data: any;
     this.admindata = JSON.parse(sessionStorage.getItem('admindata')!);
     console.log(this.admindata)
     this.chartType = 'pie';
-    this.chartLabels = ['Request Refused',  'Employee', 'Request In Progress','Request Accepted '];
+    this.chartLabels = ['demandes refusés',  'Employees', 'demandes en cours','demandes acceptés '];
    
     this.chartColors = [
       {

@@ -88,21 +88,21 @@ reason: new FormControl('', Validators.required)
 
   delete(id: any, i: number) {
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title:  'Es-tu sûr?' ,
+      text:   "Vous ne pourrez pas revenir en arrière " ,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Oui, supprimez-le !'  
     }).then((result) => {
       if (result.isConfirmed) {
         this.demandesService.deletemotif(id).subscribe(response => {
           this.dataArray.splice(i, 1)
         })
         Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
+          'Supprimé!',
+          'Votre fichier a été supprimé.' ,
           'success'
         )
       }
@@ -129,7 +129,7 @@ this.demandesService.updatemotif(this.datareason.id,formData).subscribe(
 
   Response => {
     console.log(Response)
-    Swal.fire('Saved!', '', 'success')
+    Swal.fire('Sauvegarder!', '', 'success')
     window.location.reload()
 
   }, (err: HttpErrorResponse) => {
@@ -151,7 +151,7 @@ this.demandesService.updatemotif(this.datareason.id,formData).subscribe(
     this.demandesService.createmotif(formData).subscribe(
       Response => {
         console.log(Response)
-        Swal.fire('Saved!', '', 'success')
+        Swal.fire('Sauvegarder!', '', 'success')
         window.location.reload()
 
       }, (err: HttpErrorResponse) => {

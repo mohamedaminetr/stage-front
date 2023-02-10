@@ -6,23 +6,23 @@
                 <div class="row align-items-center">
                     <div class="col-sm-6 col-12 mb-4 mb-sm-0">
                         <!-- Title -->
-                        <h1 class="h2 mb-0 ls-tight">Manage User</h1>
+                        <h1 class="h2 mb-0 ls-tight">Gérer les employés </h1>
                     </div> <!-- Actions -->
                     <div class="col-sm-6 col-12 text-sm-end">
                         <div class="mx-n1"> <a  (click)="logout()"  
                                 class="btn d-inline-flex btn-sm btn-neutral border-base mx-1">
-                                <span class=" pe-2"> <i class="bi bi-box-arrow-left"></i> </span> <span>Log Out</span>
+                                <span class=" pe-2"> <i class="bi bi-box-arrow-left"></i> </span> <span>Se déconnecter</span>
                             </a>
                         </div>
                     </div>
                 </div> <!-- Nav -->
                 <ul class="nav nav-tabs mt-4 overflow-x border-0">
-                    <li class="nav-item "> <a routerLink="/dashboard-admin" class="nav-link font-regular">Home</a> </li>
+                    <li class="nav-item "> <a routerLink="/dashboard-admin" class="nav-link font-regular">Accueil</a> </li>
                     <li class="nav-item"> <a routerLink="/gerer-demande" class="nav-link font-regular">
-                            Requests</a> </li>
-                    <li class="nav-item"> <a routerLink="/gerer-user" class="nav-link active"> Users</a> </li>
+                            Demandes</a> </li>
+                    <li class="nav-item"> <a routerLink="/gerer-user" class="nav-link active"> Employés</a> </li>
                 
-                    <li class="nav-item"> <a routerLink="/motif" class="nav-link font-regular"> Motif</a>
+                    <li class="nav-item"> <a routerLink="/motif" class="nav-link font-regular"> Motifs</a>
                     </li>
                 </ul>
             </div>
@@ -38,7 +38,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col"> <span
-                                        class="h6 font-semibold text-muted text-sm d-block mb-2">Employee</span> <span
+                                        class="h6 font-semibold text-muted text-sm d-block mb-2">Employés</span> <span
                                         class="h3 font-bold mb-0">{{dataArray.data[0].users}}</span> </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-primary text-white text-lg rounded-circle"> <i
@@ -53,8 +53,8 @@
                     <div class="card shadow border-0">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col"> <span class="h6 font-semibold text-muted text-sm d-block mb-2">Request
-                                        Accepted</span> <span class="h3 font-bold mb-0">{{dataArray.data[0].acepted}}</span>
+                                <div class="col"> <span class="h6 font-semibold text-muted text-sm d-block mb-2">Demandes acceptés
+                                        </span> <span class="h3 font-bold mb-0">{{dataArray.data[0].acepted}}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-info text-white text-lg rounded-circle"> <i
@@ -69,8 +69,8 @@
                     <div class="card shadow border-0">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col"> <span class="h6 font-semibold text-muted text-sm d-block mb-2">Request
-                                        In Progress</span> <span class="h3 font-bold mb-0">{{dataArray.data[0].encours}}</span>
+                                <div class="col"> <span class="h6 font-semibold text-muted text-sm d-block mb-2">Demandes 
+                                        en cours</span> <span class="h3 font-bold mb-0">{{dataArray.data[0].encours}}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-warning text-white text-lg rounded-circle"> <i
@@ -88,7 +88,7 @@
                     <h5 class="mb-0">employee</h5>
                     <div style="text-align: right;">
                         <button class="btn d-inline-flex btn-sm btn-primary mx-1"> <span data-toggle="modal"
-                                data-target="#exampleModal1" class="btn btn-sm btn-neutral" class=" pe-2"> Create employee +
+                                data-target="#exampleModal1" class="btn btn-sm btn-neutral" class=" pe-2"> Creer un  employé +
                             </span>
                         </button>
                     </div>
@@ -101,11 +101,11 @@
                             <tr>
                               <th scope="col"> </th>
                               <th scope="col">Cin</th>
-                                <th scope="col">First_Name</th>
-                                <th scope="col">Last_Name</th>
+                                <th scope="col">nom</th>
+                                <th scope="col">prenom</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Date_Birthday</th>
-                                <th scope="col">Balance</th>
+                                <th scope="col">date de naissance</th>
+                                <th scope="col">solde</th>
 
                                 <th></th>
                             </tr>
@@ -126,14 +126,14 @@
                                 <td *ngIf="data.role == 'employee' " class="text-end"> <button type="button" data-toggle="modal"
                                     data-target="#exampleModal2"
                                        class="btn btn-sm btn-neutral"  (click)="getdata(data.id,data.nom,data.prenom,data.cin,data.datenaissance,data.balance)"> 
-                                        Update </button> <button class="bi bi-trash"
+                                        Modifier </button> <button class="bi bi-trash"
                                         (click)="delete(data.id,i)"></button>
 
                                 </td>
 
                             </tr>
-                            <div class="card-footer border-0 py-5"> <span class="text-muted text-sm"> Showing
-                                    {{dataArray.data[0].users}} Users</span> </div>
+                            <div class="card-footer border-0 py-5"> <span class="text-muted text-sm"> il y a
+                                    {{dataArray.data[0].users}} employés</span> </div>
                         </tbody>
                     </table>
                 </div>
@@ -157,7 +157,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ajouter Employee</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Ajouter  un Employee</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -175,20 +175,20 @@
 
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">firstname </label>
+                        <label for="exampleFormControlTextarea1">nom </label>
                         <input type="text" class="form-control" name="prenom" [(ngModel)]="user.prenom" formControlName="prenom"  rows="3" required />
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">LastName </label>
+                        <label for="exampleFormControlTextarea1">prenom </label>
                         <input type="text" class="form-control" name="nom" [(ngModel)]="user.nom" formControlName="nom" rows="3" required />
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">datenaissance </label>
+                        <label for="exampleFormControlInput1">date naissance </label>
                         <input type="date" name="datenaissance" [(ngModel)]="user.datenaissance" formControlName="datenaissance" class="form-control" rows="3" required>
 
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Password </label>
+                        <label for="exampleFormControlTextarea1">mot de passe </label>
                         <input type="password" class="form-control" [(ngModel)]="user.password" formControlName="password" name="password" rows="3" required />
                     </div>
 
@@ -196,7 +196,7 @@
 
                     <br>
                     <div class="form-group">
-                        <button class="btn btn-danger" type="submit">save</button>
+                        <button class="btn btn-danger" type="submit">sauvegarder</button>
                     </div>
                 </form>
             </div>
@@ -221,7 +221,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update This Employee</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Modifier cette employé</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -234,20 +234,20 @@
                         <input type="number" class="form-control" name="cin" [(ngModel)]="datauser.cin" formControlName="cin"  rows="3" required />
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">First Name </label>
+                        <label for="exampleFormControlTextarea1">nom </label>
                         <input type="text" class="form-control" name="nom" [(ngModel)]="datauser.nom" formControlName="nom" rows="3" required />
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">LastName </label>
+                        <label for="exampleFormControlTextarea1">prenom </label>
                         <input type="text" class="form-control" name="prenom" [(ngModel)]="datauser.prenom" formControlName="prenom" rows="3" required />
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Date_Birthday </label>
+                        <label for="exampleFormControlTextarea1">date de naissance </label>
                         <input type="date" class="form-control" name="datenaissance" [(ngModel)]="datauser.datenaissance" formControlName="datenaissance" rows="3" required />
                     </div>
 
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Balance </label>
+                        <label for="exampleFormControlTextarea1">solde </label>
                         <input type="number" class="form-control" name="balance" [(ngModel)]="datauser.balance" formControlName="balance" rows="3" required />
                     </div>
                     
@@ -257,7 +257,7 @@
 
                     <br>
                     <div class="form-group">
-                        <button class="btn btn-danger" type="submit">save</button>
+                        <button class="btn btn-danger" type="submit">sauvegarder</button>
                     </div>
                 </form>
             </div>
